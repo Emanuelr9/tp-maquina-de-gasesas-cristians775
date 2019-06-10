@@ -1,15 +1,16 @@
 package ar.edu.unahur.obj2;
 
-public class Gaseosa {
+public enum Gaseosa {
 
+    gaseosa(10);
     int precio;
 
-    public Gaseosa(int precio) {
+    Gaseosa(int precio) {
         this.precio = precio;
     }
 
-    public int getPrecio(){
+   public int getPrecio(){
 
         return precio;
-    }
+   }
 }
