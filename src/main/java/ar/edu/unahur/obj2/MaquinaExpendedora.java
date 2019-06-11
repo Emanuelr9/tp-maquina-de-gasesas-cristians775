@@ -5,83 +5,83 @@ import java.util.List;
 
 public class MaquinaExpendedora {
 
-     private int dinero;
-     private  List<Gaseosa>gaseosas=new ArrayList<>();
-     private int gaseosaPrecio;
-     private Estado estado;
+    private int dinero;
+    private List<Gaseosa> gaseosas = new ArrayList<>();
+    private int gaseosaPrecio;
+    private Estado estado;
 
 
+    public MaquinaExpendedora(List<Gaseosa> gaseosa) {
+        this.gaseosas = gaseosa;
+        gaseosaPrecio = Gaseosa.gaseosa.getPrecio();
+        this.maquinaSindinero();
+    }
 
-    public MaquinaExpendedora(List<Gaseosa> gaseosa){
+    public void ingresarDinero(int dinero) {
 
-        this.gaseosas=gaseosa;
-        gaseosaPrecio=Gaseosa.gaseosa.getPrecio();
 
+       estado.ingresarDinero(dinero);
 
 
     }
+    public void setDinero(int dinero){
 
-    public void ingresarDinero(int dinero){
-
-
-         this.dinero=dinero;
-
+        this.dinero+=dinero;
     }
 
     public int getDinero() {
 
         return dinero;
     }
-    public int getStock(){
+
+    public int getStock() {
 
         return gaseosas.size();
     }
-    public void setEstado(Estado estado){
 
-        this.estado=estado;
+    public void setEstado(Estado estado) {
+
+        this.estado = estado;
 
     }
-    public int getPrecio(){
+
+    public int getPrecio() {
 
         return gaseosaPrecio;
     }
-    public void restarDinero(){
 
-        dinero-=gaseosaPrecio;
-    }
-    public void restarGaseosa(){
+    public void restarDinero() {
 
-
-            gaseosas.remove(1);
-
-
-
+        dinero -= gaseosaPrecio;
     }
 
-    public void bajarPalanca(){
+    public void restarGaseosa() {
 
-        if(dinero == 0) {
+        gaseosas.remove(1);
+    }
 
-            maquinaSindinero(gaseosaPrecio);
-            estado.bajarPalanca();
+    public void bajarPalanca() {
 
-        }else{
+        estado.bajarPalanca();
+    }
 
-            maquinaConDinero();
-            estado.bajarPalanca();
+    public void maquinaSindinero() {
+
+        this.estado = new SinDinero(this);
+    }
+
+
+    public void maquinaConDinero() {
+
+        this.estado = new ConDinero(this);
+    }
+
+    public void verificarStock(){
+
+        if(getStock()==0){
+            estado=new SinStock(this);
         }
 
-    }
-
-    public void maquinaSindinero(int precio){
-
-        this.estado=new SinDinero(precio);
-    }
-
-
-    public void maquinaConDinero(){
-
-        this.estado=new ConDinero(this);
     }
 
 }

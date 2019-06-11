@@ -10,17 +10,24 @@ public class ConDinero implements Estado {
     }
 
     @Override
+    public void ingresarDinero(int dinero) {
+
+        maquina.setDinero(dinero);
+    }
+
+    @Override
     public void bajarPalanca() {
 
         int precioTemporal = maquina.getPrecio();
         int dineroTemporal = maquina.getDinero();
-        if (maquina.getStock() >= 1) {
+
 
             if (maquina.getDinero() >= maquina.getPrecio()) {
 
                 maquina.restarDinero();
                 maquina.restarGaseosa();
-
+                maquina.maquinaSindinero();
+                this.verificarStock();
                 System.out.println("Su vuelto es de " + (dineroTemporal - precioTemporal));
 
             } else {
@@ -28,14 +35,15 @@ public class ConDinero implements Estado {
                 System.out.println("Dinero insuficiente, faltan " + (precioTemporal - dineroTemporal));
 
             }
-        } else {
 
-            {
-
-                System.out.println("No hay Stock");
-
-            }
         }
-    }
+
+
+        public void verificarStock(){
+            if(maquina.getStock()==0){
+               maquina.setEstado(new SinStock(maquina));
+            }
+
+        }
 
 }

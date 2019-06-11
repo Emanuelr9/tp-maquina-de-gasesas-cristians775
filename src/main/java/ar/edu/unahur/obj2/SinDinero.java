@@ -2,18 +2,28 @@ package ar.edu.unahur.obj2;
 
 public class SinDinero implements Estado {
 
-    int precio;
+    MaquinaExpendedora maquina;
 
-    public SinDinero(int precio){
+    public SinDinero(MaquinaExpendedora maquina){
 
-        this.precio=precio;
+        this.maquina=maquina;
 
     }
+
+    @Override
+    public void ingresarDinero(int dinero) {
+
+        maquina.setEstado(new ConDinero(maquina));
+        maquina.setDinero(dinero);
+
+
+    }
+
     @Override
     public void bajarPalanca() {
 
 
-        System.out.println("Ingrese "+ precio +" pesos para poder comprar");
+        System.out.println("Ingrese "+ maquina.getPrecio() +" pesos para poder comprar");
 
     }
 }
