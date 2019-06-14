@@ -11,39 +11,34 @@ public class ConDinero implements Estado {
 
     @Override
     public void ingresarDinero(int dinero) {
-
         maquina.setDinero(dinero);
+        if (maquina.getPrecio() > maquina.getDinero()) {
+
+            maquina.setEstado(new ConDineroInsuficiente(maquina));
+
+
+        }
+
     }
 
     @Override
     public void bajarPalanca() {
-
-        int precioTemporal = maquina.getPrecio();
-        int dineroTemporal = maquina.getDinero();
+        if (maquina.getStock() >= 1) {
 
 
-            if (maquina.getDinero() >= maquina.getPrecio()) {
+            maquina.restarGaseosa();
+            maquina.restarDinero();
+            System.out.println("Tome su gaseosa " + "su vuelto es de ");
+            maquina.darVuelto();
+            maquina.setEstado(new SinDinero(maquina));
 
-                maquina.restarDinero();
-                maquina.restarGaseosa();
-                maquina.maquinaSindinero();
-                this.verificarStock();
-                System.out.println("Su vuelto es de " + (dineroTemporal - precioTemporal));
+        } else {
 
-            } else {
+            maquina.setEstado(new SinStock(maquina));
 
-                System.out.println("Dinero insuficiente, faltan " + (precioTemporal - dineroTemporal));
-
-            }
 
         }
+    }
 
 
-        public void verificarStock(){
-            if(maquina.getStock()==0){
-               maquina.setEstado(new SinStock(maquina));
-            }
-
-        }
-
-}
+    }

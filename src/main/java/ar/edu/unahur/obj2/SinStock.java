@@ -8,9 +8,23 @@ public class SinStock implements Estado {
         this.maquina = maquina;
     }
 
-    public void bajarPalanca(){
+    @Override
+    public void ingresarDinero(int dinero) {
+        if (maquina.getStock() >= 1) {
+
+
+            maquina.setEstado(new ConDinero(maquina));
+            maquina.ingresarDinero(dinero);
+        } else {
+
+            maquina.setDinero(dinero);
+            maquina.bajarPalanca();
+        }
+    }
+    public void bajarPalanca() {
+
 
         System.out.println("No hay Stock");
-
+        maquina.darVuelto();
     }
 }

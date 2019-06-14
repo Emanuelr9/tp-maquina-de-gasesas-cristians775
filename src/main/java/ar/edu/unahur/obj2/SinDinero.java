@@ -14,7 +14,8 @@ public class SinDinero implements Estado {
     public void ingresarDinero(int dinero) {
 
         maquina.setEstado(new ConDinero(maquina));
-        maquina.setDinero(dinero);
+        maquina.ingresarDinero(dinero);
+
 
 
     }
@@ -27,3 +28,4 @@ public class SinDinero implements Estado {
 
     }
 }
+

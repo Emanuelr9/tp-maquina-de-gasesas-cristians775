@@ -44,6 +44,16 @@ public class MaquinaExpendedora {
         this.estado = estado;
 
     }
+    public void setStock(Gaseosa gaseosa){
+
+        gaseosas.add(gaseosa);
+
+    }
+    public void setStock(List<Gaseosa> gaseosa){
+
+        gaseosas=gaseosa;
+
+    }
 
     public int getPrecio() {
 
@@ -57,12 +67,19 @@ public class MaquinaExpendedora {
 
     public void restarGaseosa() {
 
-        gaseosas.remove(1);
+        gaseosas.remove(0);
     }
 
     public void bajarPalanca() {
 
         estado.bajarPalanca();
+    }
+
+    public void darVuelto(){
+        int dineroTemporal;
+        dineroTemporal=getDinero();
+        dinero=0;
+        System.out.println(dineroTemporal);
     }
 
     public void maquinaSindinero() {
@@ -71,17 +88,6 @@ public class MaquinaExpendedora {
     }
 
 
-    public void maquinaConDinero() {
 
-        this.estado = new ConDinero(this);
-    }
-
-    public void verificarStock(){
-
-        if(getStock()==0){
-            estado=new SinStock(this);
-        }
-
-    }
 
 }
