@@ -21,7 +21,8 @@ public class ConDineroInsuficiente implements Estado{
 
     @Override
     public void ingresarDinero(int dinero) {
-       maquina.setDinero(dinero);
+       
        maquina.setEstado(new ConDinero(maquina));
+        maquina.ingresarDinero(dinero);
     }
 }
